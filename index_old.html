@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>화면 분할 예시</title>
+    <style>
+        /* 전체 화면을 세로로 나눠 상단 50%, 하단 50%로 분할 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* 화면 높이의 100% 사용 */
+        }
+
+        .top {
+            /* 상단 영역 (높이 50%, 폭 100%) */
+            height: 60%;
+        }
+
+        .bottom {
+            /* 하단 영역 (높이 50%, 폭 100%) */
+            display: flex;
+            height: 40%;
+        }
+
+        .left,
+        .center,
+        .right {
+            /* 하단 영역을 각각 폭 30%, 30%, 40%로 분할 */
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            /* 이미지가 부모 요소에 맞게 크기 조정되도록 설정 */
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<div class="container">
+    <div class="top">
+        <!-- 상단에 main.png 이미지를 추가 -->
+        <img id="mainImage" src="main.png" alt="Main Image">
+    </div>
+    <div class="bottom">
+        <div class="left">
+            <!-- 하단 왼쪽에 s01.png 이미지를 추가 -->
+            <img id="sImage" src="s01.png" alt="S Image">
+        </div>
+        <div class="center">
+            <!-- 하단 가운데에 d01.png 이미지를 추가 -->
+            <img id="dImage" src="d01.png" alt="D Image">
+        </div>
+        <div class="right">
+            <!-- 하단 오른쪽에 c01.png 이미지를 추가 -->
+            <img id="cImage" src="c01.png" alt="C Image">
+        </div>
+    </div>
+</div>
+
+<script>
+    // 이미지 파일들을 배열로 저장
+    const sImages = ["s01.png", "s02.png", "s03.png", "s04.png"];
+    const dImages = ["d01.png", "d02.png"];
+    const cImages = ["c01.png", "c02.png", "c03.png", "c04.png"];
+
+    let isPlaying = false; // 이미지 전환 상태를 나타내는 플래그
+
+    // top 구역(main.png) 클릭 이벤트 핸들러
+    document.getElementById("mainImage").addEventListener("click", function () {
+        isPlaying = !isPlaying; // 플래그 반전
+        if (isPlaying) {
+            // 이미지 전환 시작
+            startImageTransition();
+        }
+    });
+
+    // 스페이스바 키를 누를 때 이미지 전환 토글
+    document.addEventListener("keydown", function (event) {
+        if (event.code === "Space") {
+            isPlaying = !isPlaying; // 플래그 반전
+            if (isPlaying) {
+                // 이미지 전환 시작
+                startImageTransition();
+            }
+        }
+    });
+
+    // 이미지 전환 함수
+    function startImageTransition() {
+        let sIndex = 0;
+        let dIndex = 0;
+        let cIndex = 0;
+
+        // s 이미지 변경 (0.2초 간격)
+        const sInterval = setInterval(function () {
+            document.getElementById("sImage").src = sImages[sIndex];
+            sIndex = (sIndex + 1) % sImages.length;
+            if (!isPlaying) {
+                clearInterval(sInterval);
+            }
+        }, 40);
+
+        // d 이미지 변경 (0.3초 간격)
+        const dInterval = setInterval(function () {
+            document.getElementById("dImage").src = dImages[dIndex];
+            dIndex = (dIndex + 1) % dImages.length;
+            if (!isPlaying) {
+                clearInterval(dInterval);
+            }
+        }, 45);
+
+        // c 이미지 변경 (0.4초 간격)
+        const cInterval = setInterval(function () {
+            document.getElementById("cImage").src = cImages[cIndex];
+            cIndex = (cIndex + 1) % cImages.length;
+            if (!isPlaying) {
+                clearInterval(cInterval);
+            }
+        }, 60);
+    }
+</script>
+</body>
+</html>
