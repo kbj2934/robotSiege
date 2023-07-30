@@ -8,18 +8,18 @@
         .container {
             display: flex;
             flex-direction: column;
-            height: 100%; /* 화면 높이의 100% 사용 */
+            height: 95%; /* 화면 높이의 100% 사용 */
         }
 
         .top {
             /* 상단 영역 (높이 50%, 폭 100%) */
-            height: 60%;
+            height: 50%;
         }
 
         .bottom {
             /* 하단 영역 (높이 50%, 폭 100%) */
             display: flex;
-            height: 40%;
+            height: 50%;
         }
 
         .left,
@@ -29,20 +29,20 @@
             flex: 1;
             display: flex;
             justify-content: center;
-            align-items: center;
+            
         }
 
         img {
             /* 이미지가 부모 요소에 맞게 크기 조정되도록 설정 */
             max-width: 100%;
-            max-height: 100%;
+            max-height:100%;
         }
 
         /* 모바일 화면에서는 세로로 나눔 */
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
-                height: 90%; /* 화면 높이의 100% 사용 */
+                height: 95%; /* 화면 높이의 100% 사용 */
             }
 
             .top,
@@ -52,7 +52,7 @@
 
             .bottom {
                 display: block;
-                text-align: center;
+               
             }
 
             .left,
@@ -60,6 +60,7 @@
             .right {
                 width: 60%;
                 height:25%;
+                justify-content: center;
                 
             }
         }
